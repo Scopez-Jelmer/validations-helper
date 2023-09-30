@@ -1,6 +1,6 @@
 <?php
 
-namespace Enums;
+namespace enums;
 
 enum ValidationAttributes: string
 {

@@ -9,15 +9,28 @@ use src\ValidationHelper;
 
 class validationsHelperTest extends TestCase
 {
+
   /**
    * @test
    */
-  public function validatesString(): void
+  public function basicStringValidation(): void
   {
-    $expectedValidationArray = ['required', 'string', 'max:10'];
+    $expectedValidationArray = ['string','required', 'max:10'];
 
-    $actuealValidationString = ValidationHelper::validateString(true);
-    var_dump($actuealValidationString);
-    $this->assertSame($expectedValidationArray, ['test', $actuealValidationString]);
+    $actuealValidationString = ValidationHelper::validateString(true, max: 10);
+  
+    $this->assertSame($expectedValidationArray, $actuealValidationString);
+  }
+
+  /**
+   * @test
+   */
+  public function uniqueStringValidation(): void
+  {
+    $expectedValidationArray = ['string','required', 'unique:posts'];
+
+    $actuealValidationString = ValidationHelper::validateString(false, unique: 'posts');
+  
+    $this->assertSame($expectedValidationArray, $actuealValidationString);
   }
 }

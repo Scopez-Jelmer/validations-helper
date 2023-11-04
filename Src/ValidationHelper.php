@@ -9,18 +9,23 @@ use enums\ValidationAttributes;
 
 class ValidationHelper
 {
-  protected static array $validation = [];
+  private static array $validation = [];
 
   protected static function push(string $value): void
   {
     self::$validation[] = $value;
   }
 
+  protected static function reset(): void
+  {
+    self::$validation = [];
+  }
+
   protected static function checkAndSetRequired(bool $required): void
   {
     if ($required) {
       self::push(ValidationAttributes::REQUIRED->value);
-      
+
       return;
     }
 
@@ -28,40 +33,41 @@ class ValidationHelper
 
     return;
   }
-  
+
   protected static function setMin(int $min): void
   {
     self::push(ValidationAttributes::MIN->value . $min);
-      
+
     return;
   }
 
   protected static function setMax(int $max): void
   {
     self::push(ValidationAttributes::MAX->value . $max);
-      
+
     return;
   }
 
   private static function setUnique(string $unique): void
   {
     self::push(ValidationAttributes::UNIQUE->value . $unique);
-      
+
     return;
   }
 
   public static function validateString(
-    bool $required, 
+    bool $required,
     ?int $min = 0,
-    ?int $max = 0, 
-    string $unique,
-    array $additionValidationRules = null
-    ): array
-  {
+    ?int $max = 0,
+    ?string $unique = null,
+  ): array {
+    if (self::$validation) {
+      self::reset();
+    }
+
     self::push(DataTypes::STRING->value);
 
-    if($required){
-
+    if ($required) {
     }
     self::checkAndSetRequired($required);
 
@@ -73,11 +79,10 @@ class ValidationHelper
       self::setMax($max);
     }
 
-    if ($unique)
-    {
+    if ($unique) {
       self::setUnique($unique);
     }
 
     return self::$validation;
   }
-} 
+}

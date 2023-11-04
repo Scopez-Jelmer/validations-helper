@@ -15,10 +15,10 @@ class validationsHelperTest extends TestCase
    */
   public function basicStringValidation(): void
   {
-    $expectedValidationArray = ['string','required', 'max:10'];
+    $expectedValidationArray = ['string', 'required', 'max:10'];
 
     $actuealValidationString = ValidationHelper::validateString(true, max: 10);
-  
+
     $this->assertSame($expectedValidationArray, $actuealValidationString);
   }
 
@@ -27,10 +27,24 @@ class validationsHelperTest extends TestCase
    */
   public function uniqueStringValidation(): void
   {
-    $expectedValidationArray = ['string','required', 'unique:posts'];
+    $expectedValidationArray = ['string', 'nullable', 'unique:posts'];
 
     $actuealValidationString = ValidationHelper::validateString(false, unique: 'posts');
-  
+
+    $this->assertSame($expectedValidationArray, $actuealValidationString);
+  }
+
+  /**
+   * @test
+   */
+  public function additionalRulesStringValidation(): void
+  {
+    $expectedValidationArray = ['string', 'nullable', 'unique:post', 'accepted:isDraft'];
+
+
+    $actuealValidationString = ValidationHelper::validateString(false, unique: 'post') + ['accepted:isDraft'];
+    var_dump($actuealValidationString);
+    die();
     $this->assertSame($expectedValidationArray, $actuealValidationString);
   }
 }

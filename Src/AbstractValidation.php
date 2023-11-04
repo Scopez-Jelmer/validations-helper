@@ -10,6 +10,19 @@ abstract class AbstractValidation
 {
   protected static array $validation = [];
 
+  protected static function setup($required, $unique)
+  {
+    if (isset(self::$validation)) {
+      self::reset();
+    }
+
+    self::checkAndSetRequired($required);
+
+    if ($unique) {
+      self::setUnique($unique);
+    }
+  }
+
   protected static function push(string $value): void
   {
     self::$validation[] = $value;
@@ -46,6 +59,21 @@ abstract class AbstractValidation
 
     return;
   }
+
+  protected static function setMinDigits(int $min): void
+  {
+    self::push(ValidationAttributes::MIN_DIGITS->value . $min);
+
+    return;
+  }
+
+  protected static function setMaxDigits(int $max): void
+  {
+    self::push(ValidationAttributes::MAX_DIGITS->value . $max);
+
+    return;
+  }
+
 
   protected static function setUnique(string $unique): void
   {

@@ -16,15 +16,9 @@ class ValidationHelper extends AbstractValidation
     ?string $unique = null,
     array $additionalRules = null
   ): array {
-    if (self::$validation) {
-      self::reset();
-    }
+    self::setup($required, $unique);
 
     self::push(DataTypes::STRING->value);
-
-    if ($required) {
-    }
-    self::checkAndSetRequired($required);
 
     if ($min) {
       self::setMin($min);
@@ -34,8 +28,29 @@ class ValidationHelper extends AbstractValidation
       self::setMax($max);
     }
 
-    if ($unique) {
-      self::setUnique($unique);
+    if ($additionalRules) {
+      self::setAddationalRules($additionalRules);
+    }
+    return self::$validation;
+  }
+
+  public static function validateInteger(
+    bool $required,
+    ?int $min = 0,
+    ?int $max = 0,
+    ?string $unique = null,
+    array $additionalRules = null
+  ): array {
+    self::setup($required, $unique);
+
+    self::push(DataTypes::INTEGER->value);
+
+    if ($min) {
+      self::setMinDigits($min);
+    }
+
+    if ($max) {
+      self::setMaxDigits($max);
     }
 
     if ($additionalRules) {

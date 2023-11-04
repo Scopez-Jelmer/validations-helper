@@ -7,7 +7,7 @@ namespace tests\feature;
 use PHPUnit\Framework\TestCase;
 use src\ValidationHelper;
 
-class integerValidationTest extends TestCase
+class IntegerValidationTest extends TestCase
 {
 
   /**

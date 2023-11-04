@@ -7,7 +7,7 @@ namespace tests\feature;
 use PHPUnit\Framework\TestCase;
 use src\ValidationHelper;
 
-class validationsHelperTest extends TestCase
+class stringValidationTest extends TestCase
 {
 
   /**
@@ -39,12 +39,11 @@ class validationsHelperTest extends TestCase
    */
   public function additionalRulesStringValidation(): void
   {
-    $expectedValidationArray = ['string', 'nullable', 'unique:post', 'accepted:isDraft'];
+    $expectedValidationArray = ['string', 'nullable', 'unique:post', 'accepted:isDraft', 'distinct'];
 
 
-    $actuealValidationString = ValidationHelper::validateString(false, unique: 'post') + ['accepted:isDraft'];
-    var_dump($actuealValidationString);
-    die();
+    $actuealValidationString = ValidationHelper::validateString(false, unique: 'post', additionalRules: ['accepted:isDraft', 'distinct']);
+
     $this->assertSame($expectedValidationArray, $actuealValidationString);
   }
 }

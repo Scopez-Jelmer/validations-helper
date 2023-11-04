@@ -48,9 +48,18 @@ class ValidationHelper
     return;
   }
 
-  private static function setUnique(string $unique): void
+  protected static function setUnique(string $unique): void
   {
     self::push(ValidationAttributes::UNIQUE->value . $unique);
+
+    return;
+  }
+
+  protected static function setAddationalRules($rules): void
+  {
+    foreach ($rules as $rule) {
+      self::push($rule);
+    }
 
     return;
   }
@@ -60,6 +69,7 @@ class ValidationHelper
     ?int $min = 0,
     ?int $max = 0,
     ?string $unique = null,
+    array $additionalRules = null
   ): array {
     if (self::$validation) {
       self::reset();
@@ -83,6 +93,9 @@ class ValidationHelper
       self::setUnique($unique);
     }
 
+    if ($additionalRules) {
+      self::setAddationalRules($additionalRules);
+    }
     return self::$validation;
   }
 }

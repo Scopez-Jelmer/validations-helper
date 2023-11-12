@@ -10,7 +10,7 @@ abstract class AbstractValidation
 {
   protected static array $validation = [];
 
-  protected static function setup($required, $unique)
+  protected static function setup($required, $unique = null)
   {
     if (isset(self::$validation)) {
       self::reset();
@@ -42,6 +42,13 @@ abstract class AbstractValidation
     }
 
     self::push(ValidationAttributes::NULLABLE->value);
+
+    return;
+  }
+
+  protected static function setSize(int $size): void
+  {
+    self::push(ValidationAttributes::SIZE->value . $size);
 
     return;
   }

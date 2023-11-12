@@ -59,10 +59,23 @@ class ValidationHelper extends AbstractValidation
     return self::$validation;
   }
 
+  public static function validateBoolean(
+    bool $required,
+    array $additionalRules = null
+  ): array {
+    self::setup($required);
+
+    self::push(DataTypes::BOOLEAN->value);
+
+    if ($additionalRules) {
+      self::setAddationalRules($additionalRules);
+    }
+    return self::$validation;
+  }
+
   public static function validateArray(
     bool $required,
-    ?int $min = 0,
-    ?int $max = 0,
+    ?int $size = 0,
     ?string $unique = null,
     array $additionalRules = null
   ): array {
@@ -70,13 +83,10 @@ class ValidationHelper extends AbstractValidation
 
     self::push(DataTypes::ARRAY->value);
 
-    if ($min) {
-      self::setMinDigits($min);
+    if ($size) {
+      self::setSize($size);
     }
 
-    if ($max) {
-      self::setMaxDigits($max);
-    }
 
     if ($additionalRules) {
       self::setAddationalRules($additionalRules);

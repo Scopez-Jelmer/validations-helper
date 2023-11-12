@@ -7,17 +7,17 @@ namespace tests\feature;
 use PHPUnit\Framework\TestCase;
 use src\ValidationHelper;
 
-class arrayValidationTest extends TestCase
+class booleanValidationTest extends TestCase
 {
 
   /**
    * @test
    */
-  public function basicArrayValidation(): void
+  public function basicBooleanValidation(): void
   {
-    $expectedValidationArray = ['required', 'array', 'size:10'];
+    $expectedValidationArray = ['required', 'boolean'];
 
-    $actualValidationArray = ValidationHelper::validateArray(true, 10);
+    $actualValidationArray = ValidationHelper::validateBoolean(true);
 
     $this->assertSame($expectedValidationArray, $actualValidationArray);
   }

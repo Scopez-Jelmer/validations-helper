@@ -1,0 +1,21 @@
+{
+  "name": "validation-helper/validation-helper",
+  "description": "Some helper methods to help you build up your validation classes quicker",
+  "require": {
+    "php": ">=8.2"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "^10.0"
+  },
+  "autoload": {
+    "psr-4": {
+      "src\\": "src/",
+      "enums\\": "enums/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "tests\\": "tests/"
+    }
+  }
+}

@@ -1,5 +1,5 @@
 {
-  "name": "validation-helper/validation-helper",
+  "name": "scopez-jelmer/validation-helper",
   "description": "Some helper methods to help you build up your validation classes quicker",
   "require": {
     "php": ">=8.2"
